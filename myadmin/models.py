@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models.base import ModelState
 
 #admin Account model
 class adminManagement(models.Model):
@@ -83,14 +84,38 @@ class insApplication(models.Model):
 class course(models.Model):
     cid = models.IntegerField(primary_key=True)
     className = models.CharField(max_length=36)
-    iid = models.IntegerField(default=0)
-    days = models.CharField(max_length=20)
-    start_time = models.SmallIntegerField(default=0)
-    duration = models.SmallIntegerField(default=0)
-    max_limit = models.SmallIntegerField(default=30)
-    current_enroll = models.SmallIntegerField(default=0)
-    wait_list = models.SmallIntegerField(default=0)
-    rating = models.FloatField(default=0.0)
+    department = models.CharField(max_length=36)
 
     class Meta:
         db_table = "course"
+
+#Schedules Model
+class schedules(models.Model):
+    sectionNum = models.IntegerField(primary_key=True)
+    className = models.CharField(max_length=36)
+    year = models.IntegerField(default=0)
+    semester = models.CharField(max_length=36)
+    iid = models.IntegerField(default=0)
+    days = models.CharField(max_length=10)
+    start_time = models.CharField(max_length=20)
+    max_limit = models.SmallIntegerField(default=10)
+    current_enroll = models.SmallIntegerField(default=0)
+    wait_list = models.SmallIntegerField(default=0)
+    status = models.CharField(max_length=10,default='Close')
+    rating = models.FloatField(default=0.0)
+
+    class Meta:
+        db_table = "schedules"
+
+#Student course model
+class stuCourse(models.Model):
+    sid = models.IntegerField(default=0)
+    cid = models.IntegerField(default=0)
+    sectionNum = models.IntegerField(default=0)
+    year = models.IntegerField(default=0)
+    semester = models.CharField(max_length=36)
+    grade = models.CharField(max_length=1)
+    curStatus = models.IntegerField(default=2)
+
+    class Meta:
+        db_table = "stuCourse"
