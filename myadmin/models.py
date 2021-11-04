@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.db import models
 from django.db.models.base import ModelState
 
@@ -109,7 +110,7 @@ class schedules(models.Model):
 
 #Student course model
 class stuCourse(models.Model):
-    sid = models.IntegerField(default=0)
+    sid = models.IntegerField(primary_key=True)
     cid = models.IntegerField(default=0)
     sectionNum = models.IntegerField(default=0)
     year = models.IntegerField(default=0)
@@ -119,3 +120,17 @@ class stuCourse(models.Model):
 
     class Meta:
         db_table = "stuCourse"
+
+#Complain message model
+class complainmsg(models.Model):
+    sendType = models.CharField(max_length=36)
+    fromId = models.IntegerField(default=0)
+    fromName = models.CharField(max_length=36)
+    receiveType = models.CharField(max_length=36)
+    receiveId = models.IntegerField(default=0)
+    receiveName = models.CharField(max_length=36)
+    curStatus = models.IntegerField(default=0)
+    createdtime = models.DateTimeField(default=datetime.now)
+
+    class Meta:
+        db_table = "complainmsg"

@@ -1,5 +1,5 @@
 from django.urls import path
-from instructor.views import index, application, login, profile
+from instructor.views import courseList, index, application, login, profile, complain
 
 urlpatterns = [
     #instructor index page
@@ -20,4 +20,13 @@ urlpatterns = [
     #instructor profile update url
     path('profile/edit', profile.editProfile, name='profile_edit'),
     path('profile/update', profile.updateProfile, name='profile_update'),
+
+    #instructor course list url
+    path('courselist', courseList.viewCourse, name='course_list'),
+    path('courselist/students/<int:sectionNum>', courseList.stuInCourse, name='stuInCourse'),
+    path('courselist/students/<int:sectionNum>/gradeupdate', courseList.gradeUpdate, name='grade_update'),
+
+    #complain page url
+    path('complain', complain.editComplain, name='complain'),
+    path('complain/update', complain.updateComplain, name='update_complain'),
 ]
